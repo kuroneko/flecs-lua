@@ -9,7 +9,7 @@ typedef struct ecs_lua_module
 
 static void import_entry_point(ecs_world_t *w)
 {
-    ecs_lua_module *m = ecs_get_context(w);
+    ecs_lua_module *m = ecs_get_binding_ctx(w);
     ecs_lua_ctx *ctx = m->ctx;
     lua_State *L = ctx->L;
 
@@ -76,11 +76,9 @@ int new_module(lua_State *L)
     ctx->error = 0;
     ecs_lua_module m = { .ctx = ctx, .name = module_name };
 
-    void *orig = ecs_get_context(w);
-
-    ecs_set_context(w, &m);
+    ecs_set_binding_ctx(w, &m, NULL);
     ecs_entity_t e = ecs_import(w, import_entry_point, module_name);
-    ecs_set_context(w, orig);
+    ecs_set_binding_ctx(w, NULL, NULL);
 
     ecs_os_free(module_name);
 

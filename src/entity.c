@@ -284,7 +284,7 @@ int lookup_symbol(lua_State *L)
 
     const char *name = luaL_checkstring(L, 1);
 
-    ecs_entity_t e = ecs_lookup_symbol(w, name, true);
+    ecs_entity_t e = ecs_lookup_symbol(w, name, true, true);
 
     lua_pushinteger(L, e);
 

@@ -241,7 +241,7 @@ int run_system(lua_State *L)
     ecs_entity_t system = luaL_checkinteger(L, 1);
     lua_Number delta_time = luaL_checknumber(L, 2);
 
-    ecs_lua_callback *sys = ecs_get_system_binding_ctx(w, system);
+    ecs_lua_callback *sys = ecs_system_get_binding_ctx(w, system);
 
     if(sys == NULL) return luaL_argerror(L, 1, "not a Lua system");
 
@@ -269,7 +269,7 @@ int set_system_context(lua_State *L)
     ecs_entity_t system = luaL_checkinteger(L, 1);
     if(lua_gettop(L) < 2) lua_pushnil(L);
 
-    ecs_lua_callback *sys = ecs_get_system_binding_ctx(w, system);
+    ecs_lua_callback *sys = ecs_system_get_binding_ctx(w, system);
 
     ecs_lua_unref(L, w, sys->param_ref);
 

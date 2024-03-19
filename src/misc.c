@@ -70,7 +70,7 @@ int check_filter_desc(lua_State *L, const ecs_world_t *world, ecs_filter_desc_t 
     return 0;
 }
 
-ecs_filter_t *checkfilter(lua_State *L, const ecs_world_t *world, int arg)
+ecs_filter_t *checkfilter(lua_State *L, ecs_world_t *world, int arg)
 {
     ecs_filter_desc_t filter_desc = {0};
 
